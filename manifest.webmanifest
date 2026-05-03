@@ -1,0 +1,9 @@
+{
+  "name": "Lawrebac Auto Garage",
+  "short_name": "LAWREBAC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081015",
+  "theme_color": "#081015",
+  "description": "Lawrebac Auto Garage booking and contact shell for Kampala clients."
+}
