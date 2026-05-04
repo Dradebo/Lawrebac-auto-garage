@@ -1,5 +1,15 @@
-const CACHE_NAME = "lawrebac-auto-shell-v4";
-const ASSETS = ["/", "/index.html", "/styles.css", "/app.js", "/manifest.webmanifest"];
+const CACHE_NAME = "lawrebac-auto-shell-v5";
+const ASSETS = [
+  "/",
+  "/index.html",
+  "/styles.css",
+  "/app.js",
+  "/manifest.webmanifest",
+  "/favicon.ico",
+  "/assets/favicon.svg",
+  "/assets/favicon-192.png",
+  "/assets/favicon-512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
