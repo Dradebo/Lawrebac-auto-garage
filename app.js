@@ -3,10 +3,19 @@ const statusCard = document.getElementById("request-status");
 const serviceInput = document.getElementById("service-input");
 const servicePicks = [...document.querySelectorAll(".service-pick")];
 const submitButton = document.getElementById("request-submit");
+const carouselTrack = document.getElementById("garage-carousel-track");
+const carouselSlides = [...document.querySelectorAll(".carousel-slide")];
+const carouselDots = document.getElementById("carousel-dots");
+const carouselCurrent = document.getElementById("carousel-current");
+const carouselTotal = document.getElementById("carousel-total");
+const carouselPrev = document.querySelector("[data-carousel-prev]");
+const carouselNext = document.querySelector("[data-carousel-next]");
 
 const LAWRENCE_PHONE = "256750200072";
 const EMAIL = "lawrebacautogarage@gmail.com";
+let carouselIndex = 0;
 
+initCarousel();
 updateSubmitState();
 
 servicePicks.forEach((button) => {
@@ -173,6 +182,41 @@ function makeWhatsAppHref(payload) {
   ];
 
   return `https://wa.me/${LAWRENCE_PHONE}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+function initCarousel() {
+  if (!carouselTrack || carouselSlides.length === 0 || !carouselDots) {
+    return;
+  }
+
+  carouselTotal.textContent = String(carouselSlides.length);
+  carouselSlides.forEach((_, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("aria-label", `Show garage photo ${index + 1}`);
+    button.addEventListener("click", () => showCarouselSlide(index));
+    carouselDots.appendChild(button);
+  });
+
+  carouselPrev?.addEventListener("click", () => showCarouselSlide(carouselIndex - 1));
+  carouselNext?.addEventListener("click", () => showCarouselSlide(carouselIndex + 1));
+
+  showCarouselSlide(0);
+}
+
+function showCarouselSlide(nextIndex) {
+  if (!carouselTrack || carouselSlides.length === 0) {
+    return;
+  }
+
+  carouselIndex = (nextIndex + carouselSlides.length) % carouselSlides.length;
+  carouselTrack.style.transform = `translateX(-${carouselIndex * 100}%)`;
+  carouselCurrent.textContent = String(carouselIndex + 1);
+
+  [...carouselDots.children].forEach((dot, index) => {
+    dot.classList.toggle("is-active", index === carouselIndex);
+    dot.setAttribute("aria-current", index === carouselIndex ? "true" : "false");
+  });
 }
 
 if ("serviceWorker" in navigator) {
