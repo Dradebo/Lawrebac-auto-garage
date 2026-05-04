@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=20260503-logo-gallery" />
+    <link rel="stylesheet" href="/styles.css?v=20260504-direct-email" />
   </head>
   <body>
     <div class="site-frame">
@@ -34,7 +34,7 @@
       <main>
         <section class="hero">
           <div class="hero-media">
-            <img alt="Front light detail of a vehicle at Lawrebac Auto Garage" src="/assets/hero-headlight.jpg" />
+            <img alt="Lawrebac Auto Garage yard with customer vehicles" src="/assets/gallery/garage-1.jpg" />
             <div class="hero-overlay"></div>
             <div class="hero-badge">Kayima Road, Kyebando</div>
           </div>
@@ -270,42 +270,29 @@
           </div>
         </section>
 
-        <section class="section request-section" id="request">
+        <section class="section request-section request-section-direct" id="request">
           <div class="request-shell">
             <div class="request-copy">
               <div class="section-heading">
-                <p class="eyebrow accent">Schedule an appointment</p>
-                <h3>Build the request in one clear flow, then email it to the garage.</h3>
+                <p class="eyebrow accent">Email the garage</p>
+                <h3>Send the request straight to Lawrebac Auto Garage.</h3>
               </div>
               <p class="lead compact">
-                Start with the repair or service your vehicle needs, then send the request so the garage can review
-                the issue quickly and call you back with the best arrival plan.
+                Choose the service, add your contact and vehicle details, then press the button. Your email app opens
+                with the full request already addressed to the workshop.
               </p>
 
-              <div class="request-path">
-                <article class="is-active" id="progress-service">
-                  <span>1</span>
-                  <strong>Choose service</strong>
-                </article>
-                <article id="progress-schedule">
-                  <span>2</span>
-                  <strong>Pick day and time</strong>
-                </article>
-                <article id="progress-details">
-                  <span>3</span>
-                  <strong>Add details and email</strong>
-                </article>
+              <div class="request-direct-card">
+                <span>Direct inbox</span>
+                <strong>lawrebacautogarage@gmail.com</strong>
+                <p>No fake booking calendar. The garage reviews the email and calls back to confirm timing.</p>
               </div>
-              <p class="request-path-copy" id="request-progress-copy">
-                Start with the service your vehicle needs so the garage can review the issue faster.
-              </p>
             </div>
 
-            <form class="request-planner" id="request-form">
+            <form class="request-planner request-email-form" id="request-form">
               <section class="request-builder">
-                <p class="card-kicker">Service selection</p>
-                <h4>What does your vehicle need?</h4>
-                <p class="planner-note">Start with the issue you want solved. Once you choose a service, the schedule and request summary update on the right.</p>
+                <p class="card-kicker">Request details</p>
+                <h4>What should the garage prepare for?</h4>
 
                 <div class="service-picks" id="service-picks">
                   <button type="button" class="service-pick" data-service="Oil change">
@@ -335,8 +322,6 @@
                 </div>
 
                 <input name="service" id="service-input" type="hidden" required />
-                <input name="slotDate" id="slot-date-input" type="hidden" required />
-                <input name="slotTime" id="slot-time-input" type="hidden" required />
 
                 <div class="request-form">
                   <label>
@@ -351,71 +336,24 @@
                     <span>Vehicle type</span>
                     <input name="vehicle" type="text" placeholder="SUV, van, sedan, truck" required />
                   </label>
+                  <label>
+                    <span>Preferred timing</span>
+                    <input name="timing" type="text" placeholder="Today, tomorrow morning, this week..." required />
+                  </label>
                   <label class="full">
                     <span>Issue description</span>
-                    <textarea name="issue" rows="4" placeholder="Tell the garage what the vehicle needs" required></textarea>
+                    <textarea name="issue" rows="5" placeholder="Tell the garage what the vehicle needs" required></textarea>
                   </label>
                 </div>
+
+                <div class="request-status" id="request-status" aria-live="polite" aria-atomic="true">
+                  <p class="card-kicker">Email request</p>
+                  <h4>Choose a service to start.</h4>
+                  <p>The button activates after the service, contact, vehicle, timing, and issue fields are filled.</p>
+                </div>
+
+                <button class="button button-primary full" id="request-submit" type="submit" disabled>Email request to Lawrebac</button>
               </section>
-
-              <aside class="request-scheduler">
-                <p class="card-kicker">Schedule</p>
-                <h4>Review the day and time options before you continue.</h4>
-                <p class="planner-note">Choose the preferred day first, then pick the time that works best. The garage will review workload and confirm the final arrival window with you.</p>
-
-                <div class="schedule-shell">
-                  <div class="schedule-top">
-                    <div>
-                      <p class="card-kicker">Choose a day</p>
-                      <strong id="schedule-month">Waiting for day selection</strong>
-                    </div>
-                    <div class="slot-legend">
-                      <span class="is-open">Preferred</span>
-                      <span class="is-limited">Limited</span>
-                      <span class="is-booked">Busy</span>
-                    </div>
-                  </div>
-
-                  <div class="day-grid" id="day-grid"></div>
-
-                  <div class="slot-section">
-                    <div class="slot-header">
-                      <p class="card-kicker">Preferred times</p>
-                      <strong id="selected-day-label">Choose a day first</strong>
-                    </div>
-                    <div class="slot-grid" id="slot-grid"></div>
-                  </div>
-                </div>
-
-                <div class="request-meta-grid">
-                  <div class="request-status" id="request-status" aria-live="polite" aria-atomic="true">
-                    <p class="card-kicker">Appointment request</p>
-                    <h4>Fast review starts here.</h4>
-                    <p>Select a service, choose a day, and pick a preferred time so the garage can review the issue and plan the next call with context.</p>
-                  </div>
-
-                  <div class="request-summary">
-                    <div>
-                      <span>Selected service</span>
-                      <strong id="summary-service">Choose a service</strong>
-                    </div>
-                    <div>
-                      <span>Appointment day</span>
-                      <strong id="summary-day">Choose a day</strong>
-                    </div>
-                    <div>
-                      <span>Time slot</span>
-                      <strong id="summary-slot">Choose a preferred time</strong>
-                    </div>
-                    <div>
-                      <span>Request details</span>
-                      <strong id="summary-details">Add your name, phone, vehicle, and issue</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <button class="button button-primary full" id="request-submit" type="submit" disabled>Choose service, schedule, and details</button>
-              </aside>
             </form>
           </div>
         </section>
@@ -446,6 +384,6 @@
       </main>
     </div>
 
-    <script src="/app.js?v=20260503-gallery" type="module"></script>
+    <script src="/app.js?v=20260504-direct-email" type="module"></script>
   </body>
 </html>

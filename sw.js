@@ -1,4 +1,4 @@
-const CACHE_NAME = "lawrebac-auto-shell-v2";
+const CACHE_NAME = "lawrebac-auto-shell-v3";
 const ASSETS = ["/", "/index.html", "/styles.css", "/app.js", "/manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
